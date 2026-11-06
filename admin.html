@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard — Smart CSC Gorakhpur</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body class="bg-slate-100 text-slate-800 min-h-screen font-sans antialiased flex flex-col">
+
+  <!-- Admin Top Bar -->
+  <header class="bg-slate-900 text-white sticky top-0 z-40 shadow-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-lg bg-emerald-600 flex items-center justify-center font-black text-white text-lg">
+          <i class="fa-solid fa-lock"></i>
+        </div>
+        <div>
+          <span class="font-extrabold text-base tracking-tight text-white block leading-tight">Smart CSC Gorakhpur</span>
+          <span class="text-[11px] text-emerald-400 font-semibold tracking-wider uppercase">दुकान 1, खाती चौक · एडमिन कंसोल</span>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <a href="index.html" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 px-3 py-1.5 rounded-lg border border-slate-700 transition">
+          <i class="fa-solid fa-arrow-left"></i> मुख्य पोर्टल
+        </a>
+        <button onclick="openNewWalkInModal()" class="text-xs bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-3.5 py-1.5 rounded-lg shadow transition flex items-center gap-1.5">
+          <i class="fa-solid fa-plus"></i> नया टोकन / ग्राहक
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full space-y-6">
+
+    <!-- Metric KPI Cards -->
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+        <div class="text-xs font-bold text-slate-500 uppercase">कुल टोकन (Total Tokens)</div>
+        <div class="text-2xl sm:text-3xl font-black text-slate-900 mt-1" id="kpiTotal">0</div>
+        <div class="text-[11px] text-emerald-600 mt-1 font-semibold">सभी पंजीकृत ग्राहक</div>
+      </div>
+
+      <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+        <div class="text-xs font-bold text-slate-500 uppercase">प्रक्रिया में (In Progress)</div>
+        <div class="text-2xl sm:text-3xl font-black text-amber-600 mt-1" id="kpiProgress">0</div>
+        <div class="text-[11px] text-amber-700 mt-1 font-semibold">पोर्टल पर लंबित आवेदन</div>
+      </div>
+
+      <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+        <div class="text-xs font-bold text-slate-500 uppercase">तैयार / डिलीवरी (Ready)</div>
+        <div class="text-2xl sm:text-3xl font-black text-emerald-700 mt-1" id="kpiReady">0</div>
+        <div class="text-[11px] text-emerald-700 mt-1 font-semibold">ग्राहक को देना बाकी</div>
+      </div>
+
+      <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+        <div class="text-xs font-bold text-slate-500 uppercase">कुल प्राप्त शुल्क (Revenue)</div>
+        <div class="text-2xl sm:text-3xl font-black text-blue-700 mt-1" id="kpiRevenue">₹0</div>
+        <div class="text-[11px] text-blue-600 mt-1 font-semibold">नकद + UPI कुल आय</div>
+      </div>
+    </div>
+
+    <!-- Booking Table Header & Filters -->
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 space-y-4">
+      <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+        
+        <div class="relative flex-1 max-w-md">
+          <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-slate-400 text-xs"></i>
+          <input type="text" id="adminSearch" onkeyup="filterBookings()" placeholder="टोकन, नाम, फोन या सेवा खोजें..." class="w-full bg-slate-50 border border-slate-300 rounded-xl pl-9 pr-4 py-2 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-emerald-600">
+        </div>
+
+        <div class="flex items-center gap-2">
+          <select id="statusFilter" onchange="filterBookings()" class="bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-semibold text-slate-700">
+            <option value="ALL">सभी स्टेटस</option>
+            <option value="In Progress">प्रक्रिया में (In Progress)</option>
+            <option value="Ready">रेडी फॉर पिकअप (Ready)</option>
+            <option value="Delivered">पूर्ण / वितरित (Delivered)</option>
+          </select>
+
+          <button onclick="exportCSV()" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold px-3 py-2 rounded-xl border border-slate-300 transition flex items-center gap-1">
+            <i class="fa-solid fa-file-csv text-emerald-600"></i> एक्सपोर्ट CSV
+          </button>
+        </div>
+      </div>
+
+      <!-- Bookings Table -->
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-xs text-slate-700">
+          <thead class="bg-slate-50 text-slate-900 uppercase text-[11px] font-bold border-b border-slate-200">
+            <tr>
+              <th class="px-4 py-3">टोकन ID</th>
+              <th class="px-4 py-3">ग्राहक विवरण</th>
+              <th class="px-4 py-3">सेवा / आवेदन</th>
+              <th class="px-4 py-3">शुल्क व भुगतान</th>
+              <th class="px-4 py-3">स्थिति (Status)</th>
+              <th class="px-4 py-3 text-right">त्वरित कार्य</th>
+            </tr>
+          </thead>
+          <tbody id="bookingsTbody" class="divide-y divide-slate-100 font-medium">
+            <!-- Dynamic rows injected here -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Walk-in Booking Modal -->
+  <div id="walkInModal" class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl relative border border-slate-200">
+      <button onclick="closeNewWalkInModal()" class="absolute right-4 top-4 text-slate-400 hover:text-slate-600 text-xl font-bold">&times;</button>
+      
+      <h3 class="text-base font-black text-slate-900 mb-4 flex items-center gap-2">
+        <i class="fa-solid fa-plus-circle text-emerald-600"></i> नया टोकन बनाएं (Walk-in Customer)
+      </h3>
+
+      <form onsubmit="handleCreateToken(event)" class="space-y-3 text-xs">
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">ग्राहक का नाम *</label>
+          <input type="text" id="wName" required placeholder="जैसे विकास यादव" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs focus:ring-2 focus:ring-emerald-600 focus:outline-none">
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">मोबाइल नंबर *</label>
+            <input type="tel" id="wPhone" required placeholder="98XXXXXXXX" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs focus:ring-2 focus:ring-emerald-600 focus:outline-none">
+          </div>
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">आधार अंतिम 4 अंक</label>
+            <input type="text" id="wAadhaar" maxlength="4" placeholder="जैसे 4070" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs focus:ring-2 focus:ring-emerald-600 focus:outline-none">
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">सेवा का नाम *</label>
+          <input type="text" id="wService" required placeholder="जैसे आय प्रमाण पत्र / नया पैन कार्ड" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs focus:ring-2 focus:ring-emerald-600 focus:outline-none">
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">शुल्क (₹)</label>
+            <input type="number" id="wFee" required value="50" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs focus:ring-2 focus:ring-emerald-600 focus:outline-none">
+          </div>
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">भुगतान स्थिति</label>
+            <select id="wPayment" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-semibold">
+              <option value="Paid">प्राप्त (Paid)</option>
+              <option value="Pending">बाकी (Pending)</option>
+            </select>
+          </div>
+        </div>
+
+        <button type="submit" class="w-full mt-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 rounded-xl shadow transition text-xs">
+          टोकन सेव करें व रसीद बनाएं
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- JavaScript Admin Logic -->
+  <script>
+    // Initial bookings stored in localStorage or default sample records
+    const defaultData = [
+      { id: 'CSC-1024', name: 'रमेश कुमार', phone: '9838012345', service: 'जाति प्रमाण पत्र (e-District)', fee: 50, payment: 'Paid', status: 'Ready', date: '02 Nov 2026' },
+      { id: 'CSC-2048', name: 'सुनील गुप्ता', phone: '9450098765', service: 'नया पैन कार्ड (NSDL)', fee: 150, payment: 'Paid', status: 'In Progress', date: '04 Nov 2026' },
+      { id: 'CSC-3011', name: 'अमित कुमार सिंह', phone: '9125011223', service: 'पुलिस चरित्र प्रमाण पत्र', fee: 100, payment: 'Paid', status: 'In Progress', date: '05 Nov 2026' },
+      { id: 'CSC-4089', name: 'प्रियंका मिश्रा', phone: '9839077665', service: 'निवास प्रमाण पत्र', fee: 50, payment: 'Paid', status: 'Delivered', date: '30 Oct 2026' }
+    ];
+
+    function getBookings() {
+      const stored = localStorage.getItem('smartcsc_bookings');
+      return stored ? JSON.parse(stored) : defaultData;
+    }
+
+    function saveBookings(data) {
+      localStorage.setItem('smartcsc_bookings', JSON.stringify(data));
+      renderTable();
+    }
+
+    function renderTable() {
+      const data = getBookings();
+      const q = (document.getElementById('adminSearch').value || '').toLowerCase();
+      const filter = document.getElementById('statusFilter').value;
+
+      let filtered = data.filter(item => {
+        const matchesSearch = item.id.toLowerCase().includes(q) ||
+                              item.name.toLowerCase().includes(q) ||
+                              item.phone.includes(q) ||
+                              item.service.toLowerCase().includes(q);
+        const matchesStatus = (filter === 'ALL') || (item.status === filter);
+        return matchesSearch && matchesStatus;
+      });
+
+      // Update KPIs
+      document.getElementById('kpiTotal').innerText = data.length;
+      document.getElementById('kpiProgress').innerText = data.filter(x => x.status === 'In Progress').length;
+      document.getElementById('kpiReady').innerText = data.filter(x => x.status === 'Ready').length;
+      
+      const totalRev = data.filter(x => x.payment === 'Paid').reduce((acc, curr) => acc + Number(curr.fee || 0), 0);
+      document.getElementById('kpiRevenue').innerText = `₹${totalRev}`;
+
+      const tbody = document.getElementById('bookingsTbody');
+      if (filtered.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6" class="text-center py-8 text-slate-400">कोई रिकॉर्ड नहीं मिला।</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(b => {
+        let badgeColor = 'bg-slate-100 text-slate-700';
+        if (b.status === 'In Progress') badgeColor = 'bg-amber-100 text-amber-800 border border-amber-200';
+        if (b.status === 'Ready') badgeColor = 'bg-emerald-100 text-emerald-800 border border-emerald-200';
+        if (b.status === 'Delivered') badgeColor = 'bg-blue-100 text-blue-800 border border-blue-200';
+
+        return `
+          <tr class="hover:bg-slate-50 transition">
+            <td class="px-4 py-3 font-mono font-bold text-slate-900">${b.id}</td>
+            <td class="px-4 py-3">
+              <div class="font-bold text-slate-900">${b.name}</div>
+              <div class="text-[11px] text-slate-500">${b.phone}</div>
+            </td>
+            <td class="px-4 py-3">
+              <div class="font-semibold text-slate-800">${b.service}</div>
+              <div class="text-[10px] text-slate-400">${b.date}</div>
+            </td>
+            <td class="px-4 py-3">
+              <span class="font-bold text-slate-900">₹${b.fee}</span>
+              <span class="text-[10px] font-bold px-1.5 py-0.5 rounded ml-1 ${b.payment === 'Paid' ? 'bg-emerald-50 text-emerald-700' : 'bg-rose-50 text-rose-700'}">${b.payment}</span>
+            </td>
+            <td class="px-4 py-3">
+              <select onchange="updateStatus('${b.id}', this.value)" class="text-[11px] font-bold rounded-lg px-2 py-1 ${badgeColor} cursor-pointer focus:outline-none">
+                <option value="In Progress" ${b.status === 'In Progress' ? 'selected' : ''}>प्रक्रिया में (In Progress)</option>
+                <option value="Ready" ${b.status === 'Ready' ? 'selected' : ''}>रेडी फॉर पिकअप (Ready)</option>
+                <option value="Delivered" ${b.status === 'Delivered' ? 'selected' : ''}>वितरित (Delivered)</option>
+              </select>
+            </td>
+            <td class="px-4 py-3 text-right space-x-1">
+              <button onclick="notifyCustomer('${b.id}')" title="WhatsApp सूचना भेजें" class="p-1.5 rounded-lg bg-emerald-50 text-emerald-700 hover:bg-emerald-100">
+                <i class="fa-brands fa-whatsapp text-sm"></i>
+              </button>
+              <button onclick="deleteBooking('${b.id}')" title="हटाएं" class="p-1.5 rounded-lg bg-rose-50 text-rose-600 hover:bg-rose-100">
+                <i class="fa-solid fa-trash-can text-sm"></i>
+              </button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function filterBookings() {
+      renderTable();
+    }
+
+    function updateStatus(id, newStatus) {
+      let data = getBookings();
+      data = data.map(b => b.id === id ? { ...b, status: newStatus } : b);
+      saveBookings(data);
+    }
+
+    function deleteBooking(id) {
+      if (confirm(`क्या आप टोकन ${id} को हटाना चाहते हैं?`)) {
+        let data = getBookings();
+        data = data.filter(b => b.id !== id);
+        saveBookings(data);
+      }
+    }
+
+    function notifyCustomer(id) {
+      const data = getBookings();
+      const b = data.find(x => x.id === id);
+      if (!b) return;
+
+      const msg = encodeURIComponent(
+        `*नमस्ते ${b.name} जी!*\n\n` +
+        `आपके आवेदन की स्थिति (Smart CSC Gorakhpur):\n` +
+        `• *टोकन संख्या:* ${b.id}\n` +
+        `• *सेवा:* ${b.service}\n` +
+        `• *वर्तमान स्थिति:* ${b.status}\n\n` +
+        `कृपया अधिक जानकारी या दस्तावेज प्राप्त करने हेतु केंद्र पर पधारें:\n` +
+        `*शॉप 1, खाती चौक, गोरखपुर*\n` +
+        `संपर्क: 93508-40070`
+      );
+
+      window.open(`https://wa.me/91${b.phone}?text=${msg}`, '_blank');
+    }
+
+    function openNewWalkInModal() {
+      document.getElementById('walkInModal').classList.remove('hidden');
+    }
+
+    function closeNewWalkInModal() {
+      document.getElementById('walkInModal').classList.add('hidden');
+    }
+
+    function handleCreateToken(e) {
+      e.preventDefault();
+      const name = document.getElementById('wName').value;
+      const phone = document.getElementById('wPhone').value;
+      const service = document.getElementById('wService').value;
+      const fee = document.getElementById('wFee').value;
+      const payment = document.getElementById('wPayment').value;
+
+      const newId = 'CSC-' + Math.floor(1000 + Math.random() * 9000);
+      const today = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+
+      const newEntry = {
+        id: newId,
+        name,
+        phone,
+        service,
+        fee: Number(fee),
+        payment,
+        status: 'In Progress',
+        date: today
+      };
+
+      const data = getBookings();
+      data.unshift(newEntry);
+      saveBookings(data);
+
+      closeNewWalkInModal();
+      alert(`नया टोकन ${newId} सफलतापूर्वक बन गया!`);
+    }
+
+    function exportCSV() {
+      const data = getBookings();
+      let csv = 'Token ID,Name,Phone,Service,Fee,Payment Status,Status,Date\n';
+      data.forEach(d => {
+        csv += `"${d.id}","${d.name}","${d.phone}","${d.service}","${d.fee}","${d.payment}","${d.status}","${d.date}"\n`;
+      });
+
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.setAttribute('href', url);
+      a.setAttribute('download', `smartcsc-bookings-${Date.now()}.csv`);
+      a.click();
+    }
+
+    window.onload = () => {
+      renderTable();
+    };
+  </script>
+</body>
+</html>

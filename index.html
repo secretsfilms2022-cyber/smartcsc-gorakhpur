@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="hi" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart CSC Gorakhpur — डिजिटल सेवा केंद्र</title>
+  <meta name="description" content="स्मार्ट सीएससी केंद्र, शॉप 1, खाती चौक, गोरखपुर। आधार, पैन कार्ड, आय-जाति-निवास प्रमाण पत्र, बैंकिंग व ऑनलाइन सेवाएं।">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f0fdf4',
+              100: '#dcfce7',
+              600: '#16a34a',
+              700: '#15803d',
+              800: '#166534',
+            },
+            saffron: {
+              500: '#ff9933',
+              600: '#ea580c',
+            },
+            cscblue: {
+              500: '#1d4ed8',
+              600: '#1e40af',
+              700: '#1e3a8a',
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased font-sans">
+
+  <!-- Top Emergency / Contact Alert Bar -->
+  <div class="bg-cscblue-700 text-white text-xs sm:text-sm py-2 px-4 shadow">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+      <div class="flex items-center gap-2 text-center sm:text-left">
+        <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+        <span><strong>शॉप 1, खाती चौक, गोरखपुर</strong> — केंद्र खुला है (सुबह 08:30 AM से 08:00 PM)</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="tel:9350840070" class="hover:underline flex items-center gap-1 font-semibold text-emerald-300">
+          <i class="fa-solid fa-phone"></i> 93508-40070
+        </a>
+        <a href="mailto:smartcsc4you@gmail.com" class="hover:underline hidden md:flex items-center gap-1">
+          <i class="fa-solid fa-envelope"></i> smartcsc4you@gmail.com
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Navigation -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-3">
+        <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-cscblue-700 via-brand-700 to-saffron-500 flex items-center justify-center text-white text-2xl font-black shadow-md">
+          <i class="fa-solid fa-landmark"></i>
+        </div>
+        <div>
+          <span class="block text-xl sm:text-2xl font-black tracking-tight text-slate-900 leading-none">
+            SMART <span class="text-cscblue-600">CSC</span>
+          </span>
+          <span class="text-xs font-semibold text-slate-500 tracking-wider">GORAKHPUR · KHATI CHOWK</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden lg:flex items-center gap-7 font-medium text-sm text-slate-700">
+        <a href="#services" class="hover:text-cscblue-600 transition">सभी सेवाएं</a>
+        <a href="#tracker" class="hover:text-cscblue-600 transition">टोकन ट्रैकर</a>
+        <a href="#fees" class="hover:text-cscblue-600 transition">शुल्क व समय</a>
+        <a href="#contact" class="hover:text-cscblue-600 transition">लोकेशन व संपर्क</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <a href="admin.html" class="hidden sm:inline-flex items-center gap-2 text-xs font-semibold px-3 py-2 border border-slate-300 rounded-lg text-slate-700 hover:bg-slate-100 transition">
+          <i class="fa-solid fa-user-shield"></i> एडमिन पैनल
+        </a>
+        <button onclick="openBookingModal('General Inquiry')" class="inline-flex items-center gap-2 bg-gradient-to-r from-cscblue-600 to-brand-700 hover:opacity-90 text-white font-semibold text-sm px-4 py-2.5 rounded-xl shadow-md transition transform active:scale-95">
+          <i class="fa-solid fa-calendar-check"></i> टोकन लें / बुक करें
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative bg-gradient-to-b from-white via-slate-50 to-slate-100 py-16 sm:py-24 overflow-hidden border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="grid lg:grid-cols-12 gap-12 items-center">
+        
+        <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold uppercase tracking-wide">
+            <i class="fa-solid fa-certificate text-emerald-600"></i> अधिकृत डिजिटल सेवा केंद्र गोरखपुर
+          </div>
+
+          <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.15]">
+            सरकारी व ऑनलाइन काम, <br class="hidden sm:block" />
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-cscblue-700 to-brand-700">बिना लाइन व बिना देरी के।</span>
+          </h1>
+
+          <p class="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto lg:mx-0">
+            आधार कार्ड, पैन कार्ड, आय-जाति-निवास प्रमाण पत्र, पुलिस वेरिफिकेशन, पासपोर्ट और बैंकिंग निकासी (AEPS) के लिए विश्वसनीय केंद्र। <strong>शॉप 1, खाती चौक, गोरखपुर</strong>।
+          </p>
+
+          <div class="flex flex-col sm:flex-row gap-3 pt-2 justify-center lg:justify-start">
+            <a href="https://wa.me/919350840070?text=Namaste%20Smart%20CSC%20Gorakhpur,%20mujhe%20online%20service%20ke%20bare%20me%20jankari%20chahiye." target="_blank" class="inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-3.5 rounded-xl shadow-lg transition">
+              <i class="fa-brands fa-whatsapp text-lg"></i> व्हाट्सएप पर बात करें
+            </a>
+            <a href="tel:9350840070" class="inline-flex items-center justify-center gap-2 bg-white border border-slate-300 hover:bg-slate-50 text-slate-800 font-bold px-6 py-3.5 rounded-xl shadow-sm transition">
+              <i class="fa-solid fa-phone text-slate-500"></i> कॉल: 93508-40070
+            </a>
+          </div>
+
+          <!-- Highlights bar -->
+          <div class="pt-6 grid grid-cols-3 gap-4 border-t border-slate-200 max-w-lg mx-auto lg:mx-0 text-center">
+            <div>
+              <div class="text-2xl font-black text-slate-900">100%</div>
+              <div class="text-xs text-slate-500 font-medium">गवर्नमेंट रसीद</div>
+            </div>
+            <div>
+              <div class="text-2xl font-black text-slate-900">15+ मिनट</div>
+              <div class="text-xs text-slate-500 font-medium">त्वरित समाधान</div>
+            </div>
+            <div>
+              <div class="text-2xl font-black text-slate-900">5,000+</div>
+              <div class="text-xs text-slate-500 font-medium">संतुष्ट नागरिक</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Token Quick Tracker Box -->
+        <div id="tracker" class="lg:col-span-5">
+          <div class="bg-white rounded-2xl shadow-xl border border-slate-200 p-6 sm:p-8 relative">
+            <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-100">
+              <h3 class="font-extrabold text-lg text-slate-900 flex items-center gap-2">
+                <i class="fa-solid fa-magnifying-glass text-cscblue-600"></i> लाइव टोकन स्टेटस चेक
+              </h3>
+              <span class="text-xs font-semibold px-2.5 py-1 bg-blue-50 text-blue-700 rounded-md">24x7 लाइव</span>
+            </div>
+
+            <p class="text-xs text-slate-500 mb-4">
+              अगर आपने हमारे केंद्र पर कोई आवेदन किया है, तो अपनी टोकन पर्ची का नंबर दर्ज करें (उदा. <code class="font-bold text-slate-800">CSC-1024</code> या <code class="font-bold text-slate-800">CSC-2048</code>):
+            </p>
+
+            <form onsubmit="handleTokenSearch(event)" class="space-y-4">
+              <div>
+                <label class="block text-xs font-bold text-slate-700 uppercase mb-1">टोकन संख्या (Token ID)</label>
+                <div class="relative">
+                  <input type="text" id="tokenInput" placeholder="जैसे CSC-1024" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-slate-900 font-bold uppercase tracking-wider focus:outline-none focus:ring-2 focus:ring-cscblue-600 text-sm">
+                  <button type="submit" class="absolute right-2 top-2 bottom-2 px-4 bg-cscblue-600 text-white rounded-lg text-xs font-bold hover:bg-cscblue-700 transition">
+                    जाँचें
+                  </button>
+                </div>
+              </div>
+            </form>
+
+            <!-- Result Box -->
+            <div id="trackerResult" class="hidden mt-6 p-4 rounded-xl border border-slate-200 bg-slate-50"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="py-16 sm:py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <h2 class="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight">
+          उपलब्ध ऑनलाइन व सरकारी सेवाएं
+        </h2>
+        <p class="mt-3 text-sm sm:text-base text-slate-600">
+          सभी सेवाओं के लिए उचित मार्गदर्शन, सरकारी रसीद और त्वरित कार्य की सुविधा उपलब्ध है।
+        </p>
+
+        <!-- Category Filters -->
+        <div class="flex flex-wrap justify-center gap-2 mt-6">
+          <button onclick="filterServices('all')" class="cat-btn active text-xs font-semibold px-4 py-2 rounded-full border border-cscblue-600 bg-cscblue-600 text-white">सभी सेवाएं</button>
+          <button onclick="filterServices('id')" class="cat-btn text-xs font-semibold px-4 py-2 rounded-full border border-slate-300 bg-white text-slate-700 hover:bg-slate-100">पहचान व प्रमाण पत्र</button>
+          <button onclick="filterServices('banking')" class="cat-btn text-xs font-semibold px-4 py-2 rounded-full border border-slate-300 bg-white text-slate-700 hover:bg-slate-100">बैंकिंग व AEPS</button>
+          <button onclick="filterServices('utility')" class="cat-btn text-xs font-semibold px-4 py-2 rounded-full border border-slate-300 bg-white text-slate-700 hover:bg-slate-100">बिल व रीचार्ज</button>
+          <button onclick="filterServices('jobs')" class="cat-btn text-xs font-semibold px-4 py-2 rounded-full border border-slate-300 bg-white text-slate-700 hover:bg-slate-100">सरकारी नौकरी फॉर्म</button>
+        </div>
+      </div>
+
+      <!-- Services Grid -->
+      <div id="servicesContainer" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Rendered by JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing & Fee Transparency Section -->
+  <section id="fees" class="py-16 bg-slate-50 border-y border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <h2 class="text-2xl sm:text-3xl font-black text-slate-900">पारदर्शी सरकारी व सर्विस शुल्क</h2>
+        <p class="text-sm text-slate-600 mt-2">हमारे केंद्र पर प्रत्येक सेवा की पक्की रसीद दी जाती है। कोई छुपा हुआ शुल्क नहीं।</p>
+      </div>
+
+      <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-sm text-slate-700">
+            <thead class="bg-slate-100 text-slate-900 uppercase text-xs font-bold border-b border-slate-200">
+              <tr>
+                <th class="px-6 py-4">सेवा का नाम</th>
+                <th class="px-6 py-4">सरकारी पोर्टल फीस</th>
+                <th class="px-6 py-4">सीएससी सर्विस शुल्क</th>
+                <th class="px-6 py-4">अनुमानित समय</th>
+                <th class="px-6 py-4 text-right">कार्य</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr class="hover:bg-slate-50">
+                <td class="px-6 py-4 font-bold text-slate-900">आय / जाति / निवास प्रमाण पत्र</td>
+                <td class="px-6 py-4 font-semibold text-slate-600">₹15</td>
+                <td class="px-6 py-4 font-semibold text-emerald-700">₹35</td>
+                <td class="px-6 py-4">5 से 7 कार्य दिवस</td>
+                <td class="px-6 py-4 text-right">
+                  <button onclick="openBookingModal('आय/जाति/निवास प्रमाण पत्र')" class="text-xs bg-cscblue-600 text-white px-3 py-1.5 rounded-lg font-semibold hover:bg-cscblue-700">बुक करें</button>
+                </td>
+              </tr>
+              <tr class="hover:bg-slate-50">
+                <td class="px-6 py-4 font-bold text-slate-900">नया पैन कार्ड (NSDL/UTI)</td>
+                <td class="px-6 py-4 font-semibold text-slate-600">₹107</td>
+                <td class="px-6 py-4 font-semibold text-emerald-700">₹43</td>
+                <td class="px-6 py-4">ई-पैन: 3 दिन, डाक: 10 दिन</td>
+                <td class="px-6 py-4 text-right">
+                  <button onclick="openBookingModal('नया पैन कार्ड')" class="text-xs bg-cscblue-600 text-white px-3 py-1.5 rounded-lg font-semibold hover:bg-cscblue-700">बुक करें</button>
+                </td>
+              </tr>
+              <tr class="hover:bg-slate-50">
+                <td class="px-6 py-4 font-bold text-slate-900">पुलिस वेरिफिकेशन चरित्र प्रमाण पत्र</td>
+                <td class="px-6 py-4 font-semibold text-slate-600">₹50</td>
+                <td class="px-6 py-4 font-semibold text-emerald-700">₹50</td>
+                <td class="px-6 py-4">10 से 15 कार्य दिवस</td>
+                <td class="px-6 py-4 text-right">
+                  <button onclick="openBookingModal('पुलिस वेरिफिकेशन')" class="text-xs bg-cscblue-600 text-white px-3 py-1.5 rounded-lg font-semibold hover:bg-cscblue-700">बुक करें</button>
+                </td>
+              </tr>
+              <tr class="hover:bg-slate-50">
+                <td class="px-6 py-4 font-bold text-slate-900">आधार बैंकिंग (कैश निकासी / बैलेंस)</td>
+                <td class="px-6 py-4 font-semibold text-slate-600">₹0 (निःशुल्क)</td>
+                <td class="px-6 py-4 font-semibold text-emerald-700">मानक बैंक नियम</td>
+                <td class="px-6 py-4">तुरंत (2 मिनट)</td>
+                <td class="px-6 py-4 text-right">
+                  <button onclick="openBookingModal('आधार बैंकिंग निकासी')" class="text-xs bg-cscblue-600 text-white px-3 py-1.5 rounded-lg font-semibold hover:bg-cscblue-700">बुक करें</button>
+                </td>
+              </tr>
+              <tr class="hover:bg-slate-50">
+                <td class="px-6 py-4 font-bold text-slate-900">बिजली बिल भुगतान व रसीद</td>
+                <td class="px-6 py-4 font-semibold text-slate-600">बिल राशि</td>
+                <td class="px-6 py-4 font-semibold text-emerald-700">₹0 - ₹10</td>
+                <td class="px-6 py-4">तुरंत पक्की रसीद</td>
+                <td class="px-6 py-4 text-right">
+                  <button onclick="openBookingModal('बिजली बिल भुगतान')" class="text-xs bg-cscblue-600 text-white px-3 py-1.5 rounded-lg font-semibold hover:bg-cscblue-700">बुक करें</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Location & Contact Section -->
+  <section id="contact" class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-gradient-to-br from-slate-900 to-cscblue-700 rounded-3xl text-white p-8 sm:p-14 shadow-2xl relative overflow-hidden">
+        
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+          <div class="space-y-6">
+            <span class="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 font-bold text-xs uppercase tracking-wider">
+              सीधे केंद्र पर पधारें
+            </span>
+            <h2 class="text-3xl sm:text-4xl font-black tracking-tight leading-tight">
+              स्मार्ट सीएससी केंद्र, गोरखपुर <br />
+              <span class="text-emerald-400">आपकी सेवा में सदैव तत्पर</span>
+            </h2>
+            <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+              किसी भी सरकारी आवेदन, सुधार या ऑनलाइन परामर्श के लिए आप सीधे हमारी दुकान पर आ सकते हैं या दिए गए नंबर पर तुरंत संपर्क कर सकते हैं।
+            </p>
+
+            <div class="space-y-4 pt-2">
+              <div class="flex items-start gap-3">
+                <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-emerald-400 text-lg flex-shrink-0">
+                  <i class="fa-solid fa-location-dot"></i>
+                </div>
+                <div>
+                  <div class="text-xs text-slate-400 uppercase font-bold">पता (Address)</div>
+                  <div class="text-sm font-semibold text-white">शॉप 1, खाती चौक, गोरखपुर, उत्तर प्रदेश</div>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3">
+                <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-emerald-400 text-lg flex-shrink-0">
+                  <i class="fa-solid fa-phone"></i>
+                </div>
+                <div>
+                  <div class="text-xs text-slate-400 uppercase font-bold">फोन व व्हाट्सएप (Call / WhatsApp)</div>
+                  <div class="text-sm font-semibold text-white">
+                    <a href="tel:9350840070" class="hover:underline">93508-40070</a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3">
+                <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-emerald-400 text-lg flex-shrink-0">
+                  <i class="fa-solid fa-clock"></i>
+                </div>
+                <div>
+                  <div class="text-xs text-slate-400 uppercase font-bold">कार्य समय (Working Hours)</div>
+                  <div class="text-sm font-semibold text-white">सोमवार से शनिवार: 08:30 AM - 08:00 PM | रविवार: 10:00 AM - 04:00 PM</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Action Card -->
+          <div class="bg-white/10 backdrop-blur-md p-6 sm:p-8 rounded-2xl border border-white/20 text-center space-y-5">
+            <i class="fa-brands fa-whatsapp text-5xl text-emerald-400"></i>
+            <h3 class="text-xl font-bold">घर बैठे डॉक्युमेंट्स भेजें</h3>
+            <p class="text-xs text-slate-200">
+              आधार, फोटो या दस्तावेज व्हाट्सएप पर भेजकर समय बचाएं। फॉर्म भरते ही आपको रसीद भेज दी जाएगी।
+            </p>
+            <a href="https://wa.me/919350840070?text=Namaste,%20mujhe%20Smart%20CSC%20par%20apna%20document%20online%20submit%20karna%20hai." target="_blank" class="block w-full py-3.5 bg-emerald-500 hover:bg-emerald-600 font-bold rounded-xl text-white shadow-lg transition">
+              <i class="fa-brands fa-whatsapp"></i> अभी व्हाट्सएप करें
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-slate-900 text-slate-400 text-xs py-8 border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+      <div>
+        <span class="text-white font-bold text-sm">Smart CSC Gorakhpur</span> · Shop 1, Khati Chowk, Gorakhpur.
+        <div class="text-[11px] text-slate-500 mt-1">अधिकृत डिजिटल सेवा कॉमन सर्विस सेंटर। सभी सरकारी ट्रेडमार्क उनके संबंधित स्वामियों के हैं।</div>
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="admin.html" class="hover:text-white transition"><i class="fa-solid fa-lock"></i> एडमिन लॉगिन</a>
+        <a href="#services" class="hover:text-white transition">सेवाएं</a>
+        <a href="tel:9350840070" class="text-emerald-400 font-semibold hover:underline">93508-40070</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Booking / Token Generation Modal -->
+  <div id="bookingModal" class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative border border-slate-100">
+      <button onclick="closeBookingModal()" class="absolute right-4 top-4 text-slate-400 hover:text-slate-600 text-xl font-bold">
+        &times;
+      </button>
+
+      <div class="flex items-center gap-3 mb-5">
+        <div class="w-10 h-10 rounded-xl bg-cscblue-50 text-cscblue-600 flex items-center justify-center text-xl font-bold">
+          <i class="fa-solid fa-ticket"></i>
+        </div>
+        <div>
+          <h3 class="text-lg font-black text-slate-900">टोकन बुक करें / अपॉइंटमेंट</h3>
+          <p class="text-xs text-slate-500">स्मार्ट सीएससी केंद्र, खाती चौक गोरखपुर</p>
+        </div>
+      </div>
+
+      <form onsubmit="handleBookingSubmit(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">आपका नाम (Full Name) *</label>
+          <input type="text" id="custName" required placeholder="जैसे राहुल कुमार" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-cscblue-600">
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">मोबाइल नंबर (WhatsApp Number) *</label>
+          <input type="tel" id="custPhone" required placeholder="10 अंकों का मोबाइल नंबर" pattern="[0-9]{10}" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-cscblue-600">
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">चुनी गई सेवा (Selected Service)</label>
+          <select id="custService" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-cscblue-600 font-semibold text-slate-800">
+            <option value="आय/जाति/निवास प्रमाण पत्र">आय / जाति / निवास प्रमाण पत्र</option>
+            <option value="नया पैन कार्ड (PAN)">नया पैन कार्ड (NSDL/UTI)</option>
+            <option value="पुलिस वेरिफिकेशन (चरित्र)">पुलिस वेरिफिकेशन (Character Certificate)</option>
+            <option value="आधार बैंकिंग / AEPS निकासी">आधार बैंकिंग / नकद निकासी</option>
+            <option value="बिजली बिल भुगतान">बिजली बिल भुगतान</option>
+            <option value="सरकारी नौकरी ऑनलाइन फॉर्म">सरकारी नौकरी / प्रवेश परीक्षा फॉर्म</option>
+            <option value="पासपोर्ट सेवा">पासपोर्ट ऑनलाइन आवेदन</option>
+            <option value="अन्य ऑनलाइन कार्य">अन्य ऑनलाइन कार्य</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">केंद्र पर आने का समय (Preferred Visit Date)</label>
+          <input type="date" id="custDate" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-cscblue-600 text-slate-700">
+        </div>
+
+        <button type="submit" class="w-full bg-gradient-to-r from-cscblue-600 to-brand-700 text-white font-bold py-3 rounded-xl shadow-md hover:opacity-95 transition text-sm">
+          टोकन पुष्टि करें व व्हाट्सएप पर भेजें
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- JavaScript Application Logic -->
+  <script>
+    // Initial Services Data
+    const servicesData = [
+      {
+        id: '1',
+        title: 'आय, जाति व निवास प्रमाण पत्र',
+        cat: 'id',
+        badge: 'ई-डिस्ट्रिक्ट यूपी',
+        icon: 'fa-solid fa-file-contract',
+        desc: 'उत्तर प्रदेश सरकार के अधिकृत ई-डिस्ट्रिक्ट पोर्टल से मूल डिजिटल प्रमाण पत्र जारी कराएं।',
+        docs: 'आधार कार्ड, फोटो, राशन कार्ड / स्वप्रमाणित घोषणा',
+        fee: '₹50 कुल'
+      },
+      {
+        id: '2',
+        title: 'नया पैन कार्ड / सुधार (PAN)',
+        cat: 'id',
+        badge: 'NSDL / UTI',
+        icon: 'fa-solid fa-id-card',
+        desc: 'वयस्क व नाबालिग के लिए नया पैन कार्ड, नाम/जन्मदिन सुधार व खोया पैन दोबारा प्राप्त करें।',
+        docs: 'आधार कार्ड, 2 पासपोर्ट फोटो, मोबाइल नंबर',
+        fee: '₹150'
+      },
+      {
+        id: '3',
+        title: 'पुलिस चरित्र प्रमाण पत्र (Character)',
+        cat: 'id',
+        badge: 'यूपी कॉप (CCTNS)',
+        icon: 'fa-solid fa-shield-halved',
+        desc: 'नौकरी, पासपोर्ट व ठेकेदारी के लिए उत्तर प्रदेश पुलिस से सत्यापित चरित्र प्रमाण पत्र।',
+        docs: 'आधार कार्ड, फोटो, प्रधान/पार्षद संस्तुति',
+        fee: '₹100 कुल'
+      },
+      {
+        id: '4',
+        title: 'आधार बैंकिंग (AEPS) व निकासी',
+        cat: 'banking',
+        badge: 'DigiPay / NPCI',
+        icon: 'fa-solid fa-fingerprint',
+        desc: 'किसी भी बैंक खाते से फिंगरप्रिंट लगाकर पैसे निकालें, बैलेंस चेक करें व मिनी स्टेटमेंट पाएं।',
+        docs: 'आधार नंबर + बैंक खाता लिंक होना अनिवार्य',
+        fee: '₹0 (निःशुल्क)'
+      },
+      {
+        id: '5',
+        title: 'बिजली बिल भुगतान व रसीद',
+        cat: 'utility',
+        badge: 'UPPCL Gorakhpur',
+        icon: 'fa-solid fa-bolt',
+        desc: 'पूर्वांचल विद्युत वितरण निगम (UPPCL) का ग्रामीण व शहरी बिजली बिल तुरंत जमा करें।',
+        docs: '10 अंकों का बिजली अकाउंट नंबर / पुराना बिल',
+        fee: 'बिल राशि'
+      },
+      {
+        id: '6',
+        title: 'सरकारी नौकरी फॉर्म व एडमिट कार्ड',
+        cat: 'jobs',
+        badge: 'SSC, UPSSSC, Railway',
+        icon: 'fa-solid fa-graduation-cap',
+        desc: 'सभी सरकारी नौकरियों, पुलिस भर्ती, टेट, रेलवे व प्रवेश परीक्षाओं का त्रुटिरहित फॉर्म।',
+        docs: 'शैक्षिक अंकपत्र, फोटो, हस्ताक्षर, आधार',
+        fee: '₹50 - ₹100'
+      }
+    ];
+
+    // Render Services
+    function renderServices(list) {
+      const c = document.getElementById('servicesContainer');
+      c.innerHTML = list.map(s => `
+        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6 hover:shadow-md hover:border-cscblue-500 transition group flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-[11px] font-bold px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded-md">${s.badge}</span>
+              <div class="w-10 h-10 rounded-xl bg-white border border-slate-200 text-cscblue-600 flex items-center justify-center text-lg group-hover:bg-cscblue-600 group-hover:text-white transition">
+                <i class="${s.icon}"></i>
+              </div>
+            </div>
+            <h3 class="font-extrabold text-base text-slate-900 group-hover:text-cscblue-700 transition">${s.title}</h3>
+            <p class="text-xs text-slate-600 mt-2 leading-relaxed">${s.desc}</p>
+            <div class="mt-4 pt-4 border-t border-slate-200/60 text-xs">
+              <span class="text-slate-400 font-semibold block mb-0.5">आवश्यक दस्तावेज:</span>
+              <span class="text-slate-700 font-medium">${s.docs}</span>
+            </div>
+          </div>
+          <div class="mt-5 pt-3 border-t border-slate-200 flex items-center justify-between">
+            <span class="text-xs font-bold text-emerald-700">${s.fee}</span>
+            <button onclick="openBookingModal('${s.title}')" class="text-xs font-bold text-cscblue-600 hover:text-cscblue-800 flex items-center gap-1">
+              आवेदन करें <i class="fa-solid fa-arrow-right text-[10px]"></i>
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Filter services
+    function filterServices(category) {
+      document.querySelectorAll('.cat-btn').forEach(btn => {
+        btn.classList.remove('bg-cscblue-600', 'text-white', 'border-cscblue-600');
+        btn.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+      });
+      event.target.classList.add('bg-cscblue-600', 'text-white', 'border-cscblue-600');
+      event.target.classList.remove('bg-white', 'text-slate-700', 'border-slate-300');
+
+      if (category === 'all') {
+        renderServices(servicesData);
+      } else {
+        renderServices(servicesData.filter(s => s.cat === category));
+      }
+    }
+
+    // Mock Token Lookup
+    function handleTokenSearch(e) {
+      e.preventDefault();
+      const val = document.getElementById('tokenInput').value.trim().toUpperCase();
+      const res = document.getElementById('trackerResult');
+      res.classList.remove('hidden');
+
+      // Sample mock records
+      const records = {
+        'CSC-1024': {
+          name: 'रमेश कुमार',
+          service: 'जाति प्रमाण पत्र (e-District)',
+          status: 'रेडी फॉर पिकअप (तैयार है)',
+          date: '02 नवंबर 2026',
+          badge: 'bg-emerald-100 text-emerald-800'
+        },
+        'CSC-2048': {
+          name: 'सुनील गुप्ता',
+          service: 'पैन कार्ड ऑनलाइन आवेदन',
+          status: 'प्रक्रिया में है (In-Progress)',
+          date: '04 नवंबर 2026',
+          badge: 'bg-amber-100 text-amber-800'
+        }
+      };
+
+      const found = records[val];
+      if (found) {
+        res.innerHTML = `
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-slate-700 uppercase">${val}</span>
+              <span class="text-[11px] font-extrabold px-2.5 py-0.5 rounded-full ${found.badge}">${found.status}</span>
+            </div>
+            <div class="text-sm font-black text-slate-900">${found.name}</div>
+            <div class="text-xs text-slate-600">${found.service} · आवेदन दिनांक: ${found.date}</div>
+            <div class="pt-2 text-[11px] text-emerald-700 font-semibold">
+              <i class="fa-solid fa-circle-check"></i> केंद्र पर आकर शॉप 1, खाती चौक से रसीद/दस्तावेज प्राप्त कर सकते हैं।
+            </div>
+          </div>
+        `;
+      } else {
+        res.innerHTML = `
+          <div class="text-xs text-rose-600 font-bold flex items-center gap-2">
+            <i class="fa-solid fa-triangle-exclamation"></i> टोकन संख्या "${val}" नहीं मिला। कृपया अपने रसीद नंबर की जांच करें या कॉल करें 93508-40070।
+          </div>
+        `;
+      }
+    }
+
+    // Modal Control
+    function openBookingModal(serviceName) {
+      if (serviceName) {
+        const sel = document.getElementById('custService');
+        for (let i = 0; i < sel.options.length; i++) {
+          if (sel.options[i].value.includes(serviceName) || serviceName.includes(sel.options[i].value)) {
+            sel.selectedIndex = i;
+            break;
+          }
+        }
+      }
+      document.getElementById('bookingModal').classList.remove('hidden');
+    }
+
+    function closeBookingModal() {
+      document.getElementById('bookingModal').classList.add('hidden');
+    }
+
+    function handleBookingSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('custName').value;
+      const phone = document.getElementById('custPhone').value;
+      const service = document.getElementById('custService').value;
+      const date = document.getElementById('custDate').value || 'आज / जल्द से जल्द';
+
+      const token = 'CSC-' + Math.floor(1000 + Math.random() * 9000);
+
+      // Create WhatsApp URL
+      const msg = encodeURIComponent(
+        `*नमस्ते Smart CSC Gorakhpur!*\n\n` +
+        `मैंने वेबसाइट से नया टोकन लिया है:\n` +
+        `• *टोकन संख्या:* ${token}\n` +
+        `• *नाम:* ${name}\n` +
+        `• *फोन:* ${phone}\n` +
+        `• *सेवा:* ${service}\n` +
+        `• *आने की तारीख:* ${date}\n\n` +
+        `कृपया मेरे आवेदन की पुष्टि करें।`
+      );
+
+      closeBookingModal();
+      window.open(`https://wa.me/919350840070?text=${msg}`, '_blank');
+      alert(`धन्यवाद ${name}! आपका अस्थायी टोकन नंबर है: ${token}। अब व्हाट्सएप विंडो खुल रही है।`);
+    }
+
+    // Initialize
+    window.onload = () => {
+      renderServices(servicesData);
+    };
+  </script>
+</body>
+</html>
